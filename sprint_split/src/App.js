@@ -1,9 +1,10 @@
 import React from 'react'
+import UserMemo from './components/Usermemo'
 
 function App() {
   return (
-    <div className="App">
-      11
+    <div>
+      <UserMemo/>
     </div>
   );
 }
