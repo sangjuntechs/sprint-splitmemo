@@ -31,6 +31,8 @@ const db = mysql.createConnection({
 
   //query
   const SELECT_MEMO = "SELECT card_memo,card_key FROM `u_card` WHERE user_id like '111726862628447894572'"
+  const SELECT_FOOD = "SELECT * FROM `a_food`"
+
 
   app.get('/usermemo', (req, res) => {
       db.query(SELECT_MEMO, (err, result) => {
@@ -43,3 +45,15 @@ const db = mysql.createConnection({
           }
       })
   })
+
+  app.get('/food', (req, res) => {
+    db.query(SELECT_FOOD, (err, result) => {
+        if (err) {
+            return res.send(err)
+        } else {
+            return res.json({
+                data: result
+            })
+        }
+    })
+})
