@@ -30,7 +30,7 @@ const db = mysql.createConnection({
 
 
   //query
-  const SELECT_MEMO = "SELECT card_memo,card_key FROM `u_card` WHERE user_id like '111726862628447894572'"
+  const SELECT_MEMO = "SELECT card_memo,card_key FROM `u_card` WHERE user_id like '103667567403001475534'"
   const SELECT_FOOD = "SELECT * FROM `a_food`"
 
 

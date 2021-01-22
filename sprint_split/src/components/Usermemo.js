@@ -10,11 +10,11 @@ const Button = styled.button`
   font-weight: 700;
   font-size: 14px;
   border-radius: 5px;
-  background-color: dodgerblue;
+  background-color: #fcc729;
   cursor: pointer;
   transition: 0.2s linear;
   :hover {
-    color: dodgerblue;
+    color: #fcc729;
     background-color: black;
   }
 `;
@@ -32,47 +32,84 @@ const UserMemo = () => {
     });
 
     Axios.get("http://localhost:5000/food").then((response) => {
-      setFoods(response.data.data)
-    })
-
-  },[]);
+      setFoods(response.data.data);
+    });
+  }, []);
 
   const split = () => {
     const memoss = memo.map((memo) => {
-      return memo.card_memo.split(" ");
+      return memo.card_memo.split(" "||',');
     });
     setSplitMemo(memoss);
     console.log(splitMemo);
   };
 
   const filterFoodsFn = () => {
-      const filterFoods = Foods.filter((food) => {
-          if (food.food_name) {
-              return food.food_name.toLowerCase().includes(selectMemo)
-          }
-      });
-      setFilterFoods(filterFoods)
-  }
+    // eslint-disable-next-line array-callback-return
+    const filterFoods = Foods.filter((food) => {
+      if (food.food_name) {
+        return (
+          food.food_name.toLowerCase().includes(selectMemo) ||
+          food.food_group.toLowerCase().includes(selectMemo)
+        );
+      }
+    });
+    setFilterFoods(filterFoods);
+  };
 
+  const onChange = (event) => {
+    const {
+      target: { name, value },
+    } = event;
+    if (name === "foodName") {
+      setSelectMemo(value);
+    }
+  };
 
   return (
     <div>
       <button onClick={split}>스플릿</button>
       {splitMemo.map((memo) => {
-          return memo.map((memos) => {
-              return <Button onClick={filterFoodsFn} onMouseOver={() => {setSelectMemo(memos)}}>{memos}</Button>
-          })
+        return memo.map((memos) => {
+          return (
+            <Button
+              onClick={filterFoodsFn}
+              onMouseOver={() => {
+                setSelectMemo(memos);
+              }}
+            >
+              {memos}
+            </Button>
+          );
+        });
       })}
-      <div>
-      <input style={{padding:'15px', margin:'5px'}}value={selectMemo}></input>
-      <button onClick={filterFoodsFn}>찾기</button>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        <input
+          style={{ padding: "15px", margin: "5px" }}
+          value={selectMemo}
+          name='foodName'
+          onChange={onChange}
+        ></input>
+        <button onClick={filterFoodsFn}>찾기</button>
+        <div style={{height:'400px',minWidth:'300px', overflow:'scroll', border:'2px solid gray', borderRadius:'5px'}}>
+          {filterFoods.map((foods) => {
+            return (
+              <div style={{ fontSize: "14px", margin: "3px" }}>
+                {`${foods.food_name}[${foods.food_group}] ${foods.food_standard_gram}g`}{" "}
+                <button>선택</button>
+              </div>
+            );
+          })}
+        </div>
       </div>
-      <>{filterFoods.map((foods) => {
-          return <div style ={{fontSize:'14px', margin:'3px'}}>{`${foods.food_name} ${foods.food_standard_gram}g`}</div>
-      })}</>
     </div>
-
-  
   );
 };
 
