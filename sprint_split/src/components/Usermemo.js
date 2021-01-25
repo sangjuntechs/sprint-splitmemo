@@ -75,10 +75,11 @@ const UserMemo = () => {
   };
 
   return (
+
     <div style={{ width: "100%", display: "flex" }}>
       <div style={{display:'flex'}}>
       <div>
-        <div style={{ width: "100%", maxWidth:'800px' }}>
+        <div style={{ width: "100%", maxWidth:'800px' ,}}>
           <Button style={{ backgroundColor: "dodgerblue" }} onClick={split}>
             스플릿
           </Button>
@@ -105,13 +106,17 @@ const UserMemo = () => {
             flexDirection: "column",
           }}
         >
+          <div style={{display:'flex'}}>
           <input
             style={{ padding: "15px", margin: "5px" }}
             value={selectMemo}
             name="foodName"
             onChange={onChange}
           ></input>
-          <button onClick={filterFoodsFn}>찾기</button>
+          
+          <Button style={{backgroundColor:'black', color:'white'}}onClick={filterFoodsFn}>찾기</Button>
+          <Button style={{backgroundColor:'dodgerblue', color:'black'}}>피드백 ㄱ ㄱ</Button>
+          </div>
           <div
             style={{
               height: "400px",
@@ -140,9 +145,9 @@ const UserMemo = () => {
         <div>
           <p style={{fontSize:'12px'}}>이전 섭취 목록</p>
           <div style={{width:'500px', height:'570px',border:'2px solid gray', borderRadius:'5px'}}>
-            <div style={{padding:'10px', backgroundColor:'#99ffcc', borderRadius:'10px', margin:'5px'}}>사과를 담은 요거트 1개</div>
-            <div style={{padding:'10px', backgroundColor:'#99ffcc', borderRadius:'10px', margin:'5px'}}>참프레 허브 닭가슴살 2개 아임 닭</div>
-            <div style={{padding:'10px', backgroundColor:'#99ffcc', borderRadius:'10px', margin:'5px'}}>사과1 크래미3 구운계란2개</div>
+            <div style={{padding:'10px', backgroundColor:'#99ffcc', borderRadius:'10px', margin:'5px'}}>사과를 담은 요거트 1개  150g</div>
+            <div style={{padding:'10px', backgroundColor:'#99ffcc', borderRadius:'10px', margin:'5px'}}>참프레 허브 닭가슴살 2개 아임 닭 300g</div>
+            <div style={{padding:'10px', backgroundColor:'#99ffcc', borderRadius:'10px', margin:'5px'}}>사과1 크래미3 구운계란2개 150g/150g/200g</div>
           </div>
         </div>
       </div>
